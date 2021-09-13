@@ -25,6 +25,25 @@ function generatePassword(charLength, addNum, addLower, addUpper, addSchar){
     if(addSchar === true){
       pwtypes.push("special")
     }
+    
+    for(var i = 0; i < charLength; i++){
+      var pwtype = pwtypes[randomNumber(0,pwtypes.length-1)]
+      if (pwtype === "number"){
+      pw += num[randomNumber(0,num.length-1)]
+      
+      }
+      else if (pwtype === "lower"){
+      pw += str[randomNumber(0,str.length-1)]
+
+      }
+      else if (pwtype === "upper"){
+      pw += str[randomNumber(0,str.length-1)].toUpperCase()
+      }
+      else {
+      pw += sChar[randomNumber(0,sChar.length-1)]
+      }
+    }
+    return pw
   }
 
 // Get references to the #generate element
@@ -45,12 +64,12 @@ function writePassword() {
   var addUpper = window.confirm("Click OK to confirm including uppercase characters.");
   var addSchar = window.confirm("Click OK to confirm including special characters.");
 
-  if (addNum === false, addLower === false, addUpper === false, addSchar === false){
+  if (addNum === false && addLower === false && addUpper === false && addSchar === false){
     window.alert("You need to choose at least one option.")
     return
   }
 
-  var password = generatePassword();
+  var password = generatePassword(charLength, addNum, addLower, addUpper, addSchar);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
